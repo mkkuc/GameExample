@@ -2,6 +2,9 @@ using Godot;
 
 public partial class Player : Area2D
 {
+	[Signal]
+	public delegate void HitEventHandler();
+	
 	[Export]
 	public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
 
@@ -11,6 +14,7 @@ public partial class Player : Area2D
 	public override void _Ready()
 	{
 		ScreenSize = GetViewportRect().Size;
+		Hide();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,5 +60,29 @@ public partial class Player : Area2D
 			Mathf.Clamp(Position.X, 0, ScreenSize.X),
 			Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
 		);
+
+		if (velocity.X < 0)
+		{
+			animatedSprite2D.FlipH = true;
+		}
+		else
+		{
+			animatedSprite2D.FlipH = false;
+		}
+	}
+	
+	public void Start(Vector2 position)
+	{
+		Position = position;
+		Show();
+		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		Hide(); // Player disappears after being hit.
+		EmitSignal(SignalName.Hit);
+		// Must be deferred as we can't change physics properties on a physics callback.
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 	}
 }

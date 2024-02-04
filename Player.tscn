@@ -28,7 +28,7 @@ radius = 27.0
 height = 68.0
 
 [node name="Player" type="Area2D"]
-position = Vector2(63, 53)
+position = Vector2(63, 55)
 script = ExtResource("1_f1wqj")
 metadata/_edit_group_ = true
 
@@ -36,7 +36,9 @@ metadata/_edit_group_ = true
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_n0wkq")
 animation = &"walk"
-frame_progress = 0.758526
+frame_progress = 0.645351
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n1dj6")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
