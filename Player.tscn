@@ -36,6 +36,7 @@ metadata/_edit_group_ = true
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_n0wkq")
 animation = &"walk"
+frame_progress = 0.758526
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n1dj6")
