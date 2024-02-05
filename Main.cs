@@ -20,7 +20,7 @@ public partial class Main : Node2D
 	
 	public void GameOver()
 	{
-		GetNode<Timer>("MobTimer").Stop();
+		// GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
 	}
 	
@@ -28,8 +28,8 @@ public partial class Main : Node2D
 	{
 		_score = 0;
 
-        Player player = GetNode<Player>("Player");
-        Marker2D startPosition = GetNode<Marker2D>("StartPosition");
+		Player player = GetNode<Player>("Player");
+		Marker2D startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
 
 		GetNode<Timer>("StartTimer").Start();
@@ -40,8 +40,8 @@ public partial class Main : Node2D
 		// Create a new instance of the Mob scene.
 		Mob mob = MobScene.Instantiate<Mob>();
 
-        // Choose a random location on Path2D.
-        PathFollow2D mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
+		// Choose a random location on Path2D.
+		PathFollow2D mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
 		mobSpawnLocation.ProgressRatio = GD.Randf();
 
 		// Set the mob's direction perpendicular to the path direction.
@@ -54,8 +54,8 @@ public partial class Main : Node2D
 		direction += (float)GD.RandRange(-Mathf.Pi / 4, Mathf.Pi / 4);
 		mob.Rotation = direction;
 
-        // Choose the velocity.
-        Vector2 velocity = new Vector2((float)GD.RandRange(150.0, 250.0), 0);
+		// Choose the velocity.
+		Vector2 velocity = new Vector2((float)GD.RandRange(150.0, 250.0), 0);
 		mob.LinearVelocity = velocity.Rotated(direction);
 
 		// Spawn the mob by adding it to the Main scene.
